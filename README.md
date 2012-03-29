@@ -6,7 +6,7 @@
 This script converts the myfinds pocket query into a geocache_visits.txt
 for garmin devices.
 
-##usage:
+###usage:
 
 * create my finds pocket query via geocaching.com
 * run this script pq2gv.sh myfinds.gpx
