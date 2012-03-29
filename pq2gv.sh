@@ -6,6 +6,9 @@
 # - create my finds pocket query
 # - run this script pq2gv.sh myfinds.gpx
 # - copy the new created geocache_visits.txt to your device
+# - remove sd card
+# - reboot device
+# - insert sd card
 # - reboot device
 # - put new caches on your device
 
