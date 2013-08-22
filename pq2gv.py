@@ -16,7 +16,7 @@
 
 
 __author__ =  "Patrick Steiner"
-__version__ = "1.0.0"
+__version__ = "1.1.0"
 
 # file handling
 import os
@@ -37,31 +37,31 @@ class GpxReader(object):
 			if node.nodeType == node.TEXT_NODE:
 				rc = rc + node.data
 		return rc
-
+	
 	def handleWaypointName(self, wpt):
 		return "%s" % self.getText(wpt.childNodes)
-
+	
 	def convert(self, filename):
 		pqfile = filename
 		
 		if os.path.exists(pqfile):
-			print "Reading file one moment..."
-
+			print "Reading file..."
+			
 			dom = parse(pqfile)
 			count = 0
 			f = codecs.open("gc_visits.txt", "w", "utf-8")
-
+			
 			for node in dom.getElementsByTagName("wpt"):
 				count += 1
 				name = self.handleWaypointName(node.getElementsByTagName("name")[0])
 				date = self.handleWaypointName(node.getElementsByTagName("groundspeak:date")[0])
-
+				
 				print "Processing: " + str(count) + ": " + name
-				#print "DBG:" + name + "," + date +",Found it,\"\""
-				f.write( name + "," + date +",Found it,\"\"\n")
-
+				#print "DBG:" + name + "," + date + ",Found it,\"\""
+				f.write( name + "," + date + ",Found it,\"\"\n")
+			
 			print str(count) + " caches processed."
-
+			
 			f.close()
 		else:
 			print "ERROR: " + pqfile + " doesn't exist"
@@ -71,9 +71,17 @@ class GpxReader(object):
 def main():
 	if len(sys.argv) == 2:
 		pqfile = sys.argv[1]
-
+		
 		gpx = GpxReader()
 		gpx.convert(pqfile)
+        
+		print "Converting file into garmin format..."
+		convertCmd = "iconv -f UTF-8 -t UCS-2LE gc_visits.txt > geocache_visits.txt"
+		os.system(convertCmd)
+
+		removeCmd = "rm -f gc_visits.txt"
+		os.system(removeCmd)
+
 	else:
 		print "Usage: pg2gv pocketquery.gpx"
 

@@ -9,7 +9,7 @@ for garmin devices.
 ###usage:
 
 * create my finds pocket query via geocaching.com
-* run this script pq2gv.sh myfinds.gpx
+* run this script pq2gv.py myfinds.gpx
 * copy the new created geocache_visits.txt to your device
 * remove sd card
 * reboot device
