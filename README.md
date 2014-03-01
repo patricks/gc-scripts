@@ -16,3 +16,6 @@ for garmin devices.
 * insert sd card
 * reboot device
 * put new caches on your device
+
+##exclude_myfinds_tomtom_route
+Excludes my finds from a tomtom route file.
